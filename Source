@@ -1,5 +1,6 @@
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
+local CoreGui = Game.CoreGui
 
 local UILibrary = {}
 UILibrary.__index = UILibrary
@@ -10,7 +11,7 @@ function UILibrary.new(title)
 
 	local ScreenGui = Instance.new("ScreenGui")
 	ScreenGui.Name = "ModernUI"
-	ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
+	ScreenGui.Parent = CoreGui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	local MainFrame = Instance.new("Frame")
@@ -152,7 +153,7 @@ function UILibrary.new(title)
 	ContentContainer.Parent = MainFrame
 
 	local Frame = Instance.new("Frame")
-	Frame.Parent = game.Players.LocalPlayer.PlayerGui.ModernUI.MainFrame.TabContainer
+	Frame.Parent = CoreGui.ModernUI.MainFrame.TabContainer
 	Frame.AnchorPoint = Vector2.new(1, 1)
 	Frame.BackgroundColor3 = Color3.new(0.12549, 0.12549, 0.12549)
 	Frame.BorderColor3 = Color3.new(0, 0, 0)
@@ -1096,7 +1097,7 @@ function UILibrary:Tab(name, icon)
 		ColorPickerPopup.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 		ColorPickerPopup.BorderSizePixel = 0
 		ColorPickerPopup.Visible = false
-		ColorPickerPopup.Parent = game.Players.LocalPlayer.PlayerGui.ModernUI
+		ColorPickerPopup.Parent = CoreGui.ModernUI
 		ColorPickerPopup.ZIndex = 100
 
 		local UICornerPopup = Instance.new("UICorner")
@@ -1763,14 +1764,14 @@ function UILibrary:Tab(name, icon)
 		_G.NotificationSystem.Count = _G.NotificationSystem.Count + 1
 		local notificationID = _G.NotificationSystem.Count
 
-		local MainContainer = game.Players.LocalPlayer.PlayerGui:FindFirstChild("NotificationMainContainer")
+		local MainContainer = CoreGui:FindFirstChild("NotificationMainContainer")
 		if not MainContainer then
 			MainContainer = Instance.new("Frame")
 			MainContainer.Name = "NotificationMainContainer"
 			MainContainer.Size = UDim2.new(0, 300, 1, 0)
 			MainContainer.Position = UDim2.new(1, -320, 0, 0)
 			MainContainer.BackgroundTransparency = 1
-			MainContainer.Parent = game.Players.LocalPlayer.PlayerGui.ModernUI
+			MainContainer.Parent = CoreGui.ModernUI
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
