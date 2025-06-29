@@ -187,7 +187,7 @@ window:SetMinimizeIcon(1234567890, Color3.fromRGB(255, 255, 255))
 ## ✅ Fechar UI Manualmente
 
 ```lua
-game.Players.LocalPlayer.PlayerGui:FindFirstChild("ModernUI"):Destroy()
+game:GetService("CoreGui"):FindFirstChild("ModernUI"):Destroy()
 ```
 
 ---
