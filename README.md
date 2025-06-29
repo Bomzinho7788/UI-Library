@@ -1,185 +1,194 @@
-# Modern UI Library para Roblox
+# UI Library - Documentação Detalhada
 
-Uma biblioteca de interface moderna, poderosa e customizável feita para Roblox com suporte a temas, abas, animações, drag-and-drop e múltiplos componentes.
-
-## ✨ Como importar
-
-```lua
-local UILibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bomzinho7788/UI-Library/refs/heads/main/Source"))()
-
-local window = UILibrary.new("Titulo da UI")
-```
-
-Parâmetro:
-
-* `Titulo da UI`: Título que aparecerá na barra superior da interface.
+Documentação completa com explicações de cada função, métodos, parâmetros e exemplos de uso.
 
 ---
 
-## 📁 Criando Abas
+## ✅ UILibrary.new(title)
+
+Cria a janela principal da interface com o título fornecido.
 
 ```lua
-local tab = window:Tab("Nome da Aba", "IconeId opcional")
+local window = UILibrary.new("Meu Título")
 ```
 
 Parâmetros:
 
-* `Nome da Aba`: Nome visível no botão da aba.
-* `IconeId`: ID opcional de imagem para o ícone.
+* `title` (string): texto exibido no topo da UI.
 
 ---
 
-## ▶️ tab\:Button({...})
+## ✅ window\:Tab(name, icon)
 
-Cria um botão clicável com texto.
+Cria uma nova aba na interface.
 
 ```lua
-tab:Button({
-    Name = "Texto do Botão",
-    Callback = function()
-        print("Clicado!")
-    end,
-    Disabled = false, -- opcional
-    Color = Color3.fromRGB(45, 45, 45), -- opcional
-    HoverColor = Color3.fromRGB(55, 55, 55),
-    ClickColor = Color3.fromRGB(65, 65, 65)
+local aba = window:Tab("Principal", "rbxassetid://12345678")
+```
+
+Parâmetros:
+
+* `name` (string): nome da aba.
+* `icon` (string, opcional): assetId do ícone da aba.
+
+---
+
+## ✅ aba\:Button({...})
+
+Cria um botão clicável com animações.
+
+```lua
+local btn = aba:Button({
+  Name = "Clique Aqui",
+  Callback = function()
+    print("Botão clicado!")
+  end,
+  Disabled = false,
+  Color = Color3.fromRGB(45, 45, 45),
+  HoverColor = Color3.fromRGB(55, 55, 55),
+  ClickColor = Color3.fromRGB(65, 65, 65)
 })
 ```
 
-Métodos retornados:
+### Métodos do botão:
 
-* `:SetName(text)`
-* `:SetDisabled(bool)`
-* `:SetColors(cor, hover, click)`
-* `:Click()` (simula clique)
-* `:SetVisible(bool)`
-* `:Update({...})` (atualiza propriedades)
+* `btn:SetName(nome)` → altera o texto do botão.
+* `btn:SetDisabled(boolean)` → ativa/desativa o botão.
+* `btn:SetColors(cor, hover, click)` → altera as cores.
+* `btn:SetVisible(boolean)` → esconde/mostra.
+* `btn:Click()` → simula um clique manualmente.
+* `btn:Update({...})` → redefine as propriedades com nova tabela.
 
 ---
 
-## 📄 tab\:TextBox({...})
+## ✅ aba\:TextBox({...})
 
-Cria uma caixa de texto com placeholder e callback ao pressionar Enter.
+Caixa de texto com título e placeholder.
 
 ```lua
-tab:TextBox({
-    Name = "Label",
-    Placeholder = "Digite algo...",
-    Callback = function(texto)
-        print("Digitado:", texto)
-    end,
-    Default = "Valor inicial",
-    ClearOnFocus = false
+local caixa = aba:TextBox({
+  Name = "Nickname",
+  Placeholder = "Digite...",
+  Default = "Texto inicial",
+  Callback = function(txt)
+    print(txt)
+  end,
+  ClearOnFocus = true
 })
 ```
 
-Métodos:
+### Métodos:
 
-* `:SetText(text)`
-* `:GetText()`
-* `:Focus()`
-* `:Clear()`
-* `:SetPlaceholder(text)`
-* `:SetName(titulo)`
-* `:SetVisible(bool)`
-* `:Update({...})`
+* `caixa:SetText(valor)`
+* `caixa:GetText()`
+* `caixa:SetPlaceholder(texto)`
+* `caixa:SetName(nome)`
+* `caixa:SetVisible(boolean)`
+* `caixa:Focus()`
+* `caixa:Clear()`
+* `caixa:Update({...})`
 
 ---
 
-## 📂 tab\:Dropdown({...})
+## ✅ aba\:Dropdown({...})
 
-Lista suspensa com opções selecionáveis.
+Menu suspenso com múltiplas opções.
 
 ```lua
-tab:Dropdown({
-    Name = "Escolher",
-    Options = {"A", "B", "C"},
-    Default = "B",
-    Callback = function(opcao)
-        print("Selecionado:", opcao)
-    end
+local drop = aba:Dropdown({
+  Name = "Escolha",
+  Options = {"A", "B", "C"},
+  Default = "B",
+  Callback = function(opcao)
+    print("Selecionado:", opcao)
+  end
 })
 ```
 
-Métodos:
+### Métodos:
 
-* `:SetOptions({})`
-* `:SetValue(valor)`
-* `:GetValue()`
-* `:SetName(nome)`
-* `:SetVisible(bool)`
-* `:Update({...})`
+* `drop:SetOptions({"X", "Y"})`
+* `drop:SetValue("X")`
+* `drop:GetValue()`
+* `drop:SetName(nome)`
+* `drop:SetVisible(boolean)`
+* `drop:Update({...})`
 
 ---
 
-## 🎨 tab\:ColorPicker({...})
+## ✅ aba\:ColorPicker({...})
 
-Abre um popup para escolher uma cor RGB/HSV com visualização e hex.
+Abre uma janela para selecionar cor com suporte a HEX e RGB.
 
 ```lua
-tab:ColorPicker({
-    Name = "Cor",
-    Default = Color3.fromRGB(255, 0, 0),
-    Callback = function(cor)
-        print("Selecionada:", cor)
-    end
+local picker = aba:ColorPicker({
+  Name = "Escolher Cor",
+  Default = Color3.fromRGB(255, 0, 0),
+  Callback = function(cor)
+    print("Nova cor:", cor)
+  end
 })
 ```
 
-Métodos:
+### Métodos:
 
-* `:SetColor(Color3)`
-* `:GetColor()`
-* `:SetName(nome)`
-* `:SetVisible(bool)`
-* `:Update({...})`
+* `picker:SetColor(Color3)`
+* `picker:GetColor()`
+* `picker:SetName(nome)`
+* `picker:SetVisible(boolean)`
+* `picker:Update({...})`
 
 ---
 
-## ✔️ tab\:Toggle({...})
+## ✅ aba\:Toggle({...})
 
-Cria um interruptor on/off com estado inicial e callback.
+Cria um botão de ativar/desativar (tipo switch).
 
 ```lua
-tab:Toggle({
-    Name = "Ativar algo",
-    Default = true,
-    Callback = function(ativo)
-        print("Estado:", ativo)
-    end
+local toggle = aba:Toggle({
+  Name = "Ativar Som",
+  Default = true,
+  Callback = function(status)
+    print("Ativado?", status)
+  end
 })
 ```
 
-Métodos:
+### Métodos:
 
-* `:SetValue(bool)`
-* `:GetValue()`
-* `:SetName(nome)`
-* `:SetVisible(bool)`
-* `:Update({...})`
+* `toggle:SetValue(boolean)`
+* `toggle:GetValue()`
+* `toggle:SetName(nome)`
+* `toggle:SetVisible(boolean)`
+* `toggle:Update({...})`
 
 ---
 
-## 🕝 Minimizar/Restaurar UI
+## ✅ window\:ToggleMinimize()
+
+Minimiza ou restaura a UI.
 
 ```lua
 window:ToggleMinimize()
 ```
 
-Definir ícone de restauração:
+---
+
+## ✅ window\:SetMinimizeIcon(iconId, color)
+
+Define o ícone e cor do botão de restaurar.
 
 ```lua
-window:SetMinimizeIcon(7072706318, Color3.fromRGB(255, 255, 255))
+window:SetMinimizeIcon(1234567890, Color3.fromRGB(255, 255, 255))
 ```
 
 ---
 
-## ℹ️ Observações
+## ✅ Fechar UI Manualmente
 
-* Todos os componentes usam `UIListLayout` responsivo.
-* Altamente customizável via `.Update()` e cores.
-* Componentes com animações suaves.
-* Suporte a drag do MainFrame e do botão de restauração.
+```lua
+game.Players.LocalPlayer.PlayerGui:FindFirstChild("ModernUI"):Destroy()
+```
 
 ---
 
